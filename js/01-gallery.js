@@ -3,7 +3,7 @@ import { galleryItems } from './gallery-items.js';
 const gallery = document.querySelector('.gallery');
 
 gallery.insertAdjacentHTML('afterbegin', markup(galleryItems))
-gallery.addEventListener('click', handlerClick())
+gallery.addEventListener('click', handlerClick)
 
 function markup(arr) { 
     return arr.map(({ preview, original, description }) =>
@@ -13,28 +13,21 @@ function markup(arr) {
             <img
             class="gallery__image"
             src="${preview}"
-            data-source="large-image.jpg"
+            data-source="${original}"
             alt="${description}"
             />
         </a>
         </li>`).join('');
 }
 
-const instance = basicLightbox.create(`
-	 <img
-            class="gallery__image"
-            src="${original}"
-            data-source="large-image.jpg"
-            alt="${description}"
-            />
-`)
-
-function handlerClick(event) { 
+function handlerClick(event) {
     event.preventDefault();
-    instance.show();
-     if (event.target === event.currentTarget) {
-    return;
-  }
-}
 
-console.log(galleryItems);
+    const instance = basicLightbox.create(`
+    <img src="${event.target.dataset.source}" width="800" height="600">
+    `)
+
+    if (event.target === event.currentTarget) {
+        return;
+    } else { return instance.show() }
+}
