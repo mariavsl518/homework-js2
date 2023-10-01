@@ -23,6 +23,7 @@ function markup(arr) {
     
 function lightbox() { 
     return `<img src="" width="800" height="600">`
+    // find the way to insert
 }
 
 function handlerClick(event) {
@@ -31,7 +32,9 @@ function handlerClick(event) {
     if (event.target === event.currentTarget) {
         return;
     } else {
+
         // add url link here
+
         return instance.show(()=> document.addEventListener('keydown', escapeClose))
     }
 }
