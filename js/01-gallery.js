@@ -1,7 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 
 const gallery = document.querySelector('.gallery');
-const instance = basicLightbox.create(lightbox());
 
 gallery.insertAdjacentHTML('afterbegin', markup(galleryItems))
 gallery.addEventListener('click', handlerClick)
@@ -20,27 +19,21 @@ function markup(arr) {
         </a>
         </li>`).join('');
 }
-    
-function lightbox() { 
-    return `<img src="" width="800" height="600">`
-    // find the way to insert
-}
 
 function handlerClick(event) {
     event.preventDefault();
 
+    const instance = basicLightbox.create(`<img src="${event.target.dataset.source}" width="800" height="600">`);
     if (event.target === event.currentTarget) {
         return;
     } else {
-
-        // add url link here
-
         return instance.show(()=> document.addEventListener('keydown', escapeClose))
     }
-}
 
-function escapeClose(event) {
+    function escapeClose(event) {
         if (event.code === 'Escape') {
             return instance.close()
         }
     }
+}
+
