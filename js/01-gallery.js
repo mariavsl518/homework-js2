@@ -32,6 +32,7 @@ function handlerClick(event) {
 
     function escapeClose(event) {
         if (event.code === 'Escape') {
+            document.removeEventListener('keydown', escapeClose)
             return instance.close()
         }
     }
